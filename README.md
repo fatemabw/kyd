@@ -58,7 +58,7 @@ I/Ps:
         
 O/Ps: 
 ```
-dhcp-db-extend : file with bro formatted entries to append to dhcp-db.zeek
+dhcp-db-extend : file with Zeek formatted entries to append to dhcp-db.zeek
 dhcp-db-FBQ : Tab separated txt file to add to the dhcp-db.txt , to log DHCP fingerprints local to your network
 Also prints out the responses on the standard output
 ```
