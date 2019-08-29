@@ -21,7 +21,7 @@ There are two scripts that you would need to load in your local.bro file:
  
  `dhcp-db.bro` (containing the DHCP hash and DHCP device info)
  
- `dhcp-fp.bro` (The script that uses dhcp-db.bro for matching the dhcp fingerprints and generates a new log file in your zeek logs folder named: dhcpfp.log)
+ `dhcp-fp.bro` (The script that uses dhcp-db.bro for matching the dhcp fingerprints and generates a new log file in your zeek logs folder named: `dhcpfp.log`)
 
  The scripts are available as a Zeek package, hence you can install by using the Bro Package Manager and this one simple command:
  
@@ -36,7 +36,7 @@ After loading the scripts, restart your zeek cluster and a new file `dhcpfp.log`
 ## Build Your Own KYD database (Fingerbank integration)
 
 Once you load the scripts for DHCP FP, Zeek will start generating dhcpfp.log which will containg the DHCP fingerprints seen on your network.
-For the ones that are not in the local dhcp-db.bro database file, will be logged as "Unknown".
+For the ones that are not in the local `dhcp-db.bro` database file, will be logged as "Unknown".
 You can get the unknown DHCP fingerprints and hashes seen in a day (or whatever time period you want to chose) on your network and run those through the python script - `dhcp-unknown.py`
 
 ### Pre-requisite for using dhcp-unknown.py
