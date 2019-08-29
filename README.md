@@ -45,7 +45,7 @@ You can get the unknown DHCP fingerprints and hashes seen in a day (or whatever 
 
 To query and use the Fingerbank's API, you need to get an `API key`, it is free and can get by logging into https://api.fingerbank.org/ with your github account.
 Once logged in you can go your profile by clicking on your user account at the top right corner.  
-In the profile, it lists the API key and per minute API limit, which is 300/hr and 1,000,000/month. These limits are far more than enogh to query the API database, as we hardly see 30-40 uniq DHCP hashes/fingerprints per day that are unknown in our network.
+In the profile, it lists the API key and per minute API limit, which is 300/hr and 1,000,000/month. These limits are far more than enough to query the API database, as we hardly see 30-40 uniq DHCP hashes/fingerprints per day that are unknown in our network.
 
 ### Using dhcp-unknown.py
 
