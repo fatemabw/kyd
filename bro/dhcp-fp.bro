@@ -1,4 +1,4 @@
-@load ./dhcp-db-new
+@load ./dhcp-db.bro
 @load base/protocols/dhcp
 
 module DHCPFP;
