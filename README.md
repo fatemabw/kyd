@@ -17,17 +17,17 @@ The python script used to query Fingerbank's database is also provided, to build
 ## Usage & installation:
 
 ### How to use it in Zeek?
-There are two scripts that you would need to load in your local.bro file:
+There are two scripts that you would need to load in your local.zeek file:
  
- `dhcp-db.bro` (containing the DHCP hash and DHCP device info)
+ `dhcp-db.zeek` (containing the DHCP hash and DHCP device info)
  
- `dhcp-fp.bro` (The script that uses dhcp-db.bro for matching the dhcp fingerprints and generates a new log file in your zeek logs folder named: `dhcpfp.log`)
+ `dhcp-fp.zeek` (The script that uses dhcp-db.zeek for matching the dhcp fingerprints and generates a new log file in your zeek logs folder named: `dhcpfp.log`)
 
- The scripts are available as a Zeek package, hence you can install by using the Bro Package Manager and this one simple command:
+ The scripts are available as a Zeek package, hence you can install by using the Zeek Package Manager and this one simple command:
  
  `$ zkg install kyd`
  
- OR download the files to bro/share/bro/site/kyd and add this line to your local.bro script:
+ OR download the files to zeek/share/zeek/site/kyd and add this line to your local.zeek script:
  
  `@load ./kyd`
 
@@ -36,7 +36,7 @@ After loading the scripts, restart your zeek cluster and a new file `dhcpfp.log`
 ## Build Your Own KYD database (Fingerbank integration)
 
 Once you load the scripts for DHCP FP, Zeek will start generating `dhcpfp.log` which will containg the DHCP fingerprints seen on your network.
-For the ones that are not in the local `dhcp-db.bro` database file, will be logged as "Unknown".
+For the ones that are not in the local `dhcp-db.zeek` database file, will be logged as "Unknown".
 You can get the unknown DHCP fingerprints and hashes seen in a day (or whatever time period you want to chose) on your network and run those through the python script - `dhcp-unknown.py`
 
 ### Pre-requisite for using dhcp-unknown.py
@@ -58,7 +58,7 @@ I/Ps:
         
 O/Ps: 
 ```
-dhcp-db-extend : file with bro formatted entries to append to dhcp-db.bro
+dhcp-db-extend : file with bro formatted entries to append to dhcp-db.zeek
 dhcp-db-FBQ : Tab separated txt file to add to the dhcp-db.txt , to log DHCP fingerprints local to your network
 Also prints out the responses on the standard output
 ```
@@ -66,12 +66,12 @@ Also prints out the responses on the standard output
 Getting the inputs:
 ```
 -k : Api-key: https://api.fingerbank.org/users/register
--f : $ zcat /usr/local/bro/2.6.2/logs/2019-08-28/dhcpfp.*.gz | grep "Unknown" | awk -F'\t' '{print $9,$10}' | sort | uniq > unknown-hash
+-f : $zcat /usr/local/zeek/2.6.2/logs/2019-08-28/dhcpfp.*.gz | grep "Unknown" | awk -F'\t' '{print $9,$10}' | sort | uniq > unknown-hash
 ```
 
 Usage Example:
 ```
-$ zcat /usr/local/bro/2.6.2/logs/2019-08-28/dhcpfp.*.gz | grep "Unknown" | awk -F'\t' '{print $9,$10}' | sort | uniq > unknown-hash
+$ zcat /usr/local/zeek/2.6.2/logs/2019-08-28/dhcpfp.*.gz | grep "Unknown" | awk -F'\t' '{print $9,$10}' | sort | uniq > unknown-hash
 
 $ cat unknown-hash
 
