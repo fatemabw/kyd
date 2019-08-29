@@ -1,4 +1,4 @@
-@load ./dhcp-db.bro
+@load ./dhcp-db.zeek
 @load base/protocols/dhcp
 
 module DHCPFP;
