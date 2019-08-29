@@ -21,7 +21,7 @@ There are two scripts that you would need to load in your local.zeek file:
  
  `dhcp-db.zeek` (containing the DHCP hash and DHCP device info)
  
- `dhcp-fp.zeek` (The script that uses dhcp-db.zeek for matching the dhcp fingerprints and generates a new log file in your zeek logs folder named: `dhcpfp.log`)
+ `dhcp-fp.zeek` (The script that uses dhcp-db.zeek for matching the dhcp fingerprints and generates a new log file in your Zeek logs folder named: `dhcpfp.log`)
 
  The scripts are available as a Zeek package, hence you can install by using the Zeek Package Manager and this one simple command:
  
@@ -31,7 +31,7 @@ There are two scripts that you would need to load in your local.zeek file:
  
  `@load ./kyd`
 
-After loading the scripts, restart your zeek cluster and a new file `dhcpfp.log` should start getting genarated logging the device information and DHCP hashes/fingerprints seen in the traffic.
+After loading the scripts, restart your Zeek cluster and a new file `dhcpfp.log` should start getting genarated logging the device information and DHCP hashes/fingerprints seen in the traffic.
 
 ## Build Your Own KYD database (Fingerbank integration)
 
