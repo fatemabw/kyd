@@ -8,7 +8,7 @@ export {
     # Append the value LOG to the Log::ID enumerable.
     redef enum Log::ID += { LOG };
 
-    # Define a new type called TLSFP::Info.
+    # Define a new type called DHCPFP::Info.
     type Info: record {
         ts: time &log;
         conn_uid: string &log;
@@ -21,7 +21,6 @@ export {
 }
 
 type DHCPFPStorage: record {
-
         DHCPhash: string &default="";
         DHCPclient: string &default="";
         param_list: string &default="";
