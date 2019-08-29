@@ -113,9 +113,7 @@ def main():
     else:
         proxy = "not_set"
 
-
     queryFingerbank(file_dic,api_key,proxy)
 
-
 if __name__ == "__main__":
-        main()
+    main()
