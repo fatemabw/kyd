@@ -25,7 +25,7 @@ There are two scripts that you would need to load in your local.bro file:
 
  The scripts are available as a Zeek package, hence you can install by using the Bro Package Manager and this one simple command:
  
- `$ bro-pkg install kyd`
+ `$ zkg install kyd`
  
  OR download the files to bro/share/bro/site/kyd and add this line to your local.bro script:
  
