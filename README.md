@@ -96,7 +96,3 @@ It will help others to make use of the already queried DHCP fingerprint and devi
 A general method (most probably a python script) to genarate DHCP hashes from the DHCP fingerprints that can be extracted from any pcap captures available that has captured DHCP conversations,
 So that this can be integrated with other sniffing NSMs/IDSs for doing device classification using dhcp-db.txt database or directly quering Fingerbanks API using `dhcp-unknown.py`.
 
-## A general profile over a one day period
-
-![GitHub Logo](C:\Users\fatema\Desktop\dhcpfp.png)
-Format: ![Alt Text](url)
