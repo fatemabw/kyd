@@ -1,7 +1,7 @@
 DHCP-hash	DHCP-FP	FingerBank-Device-name	Score%
-32ab58f29eea4ba05d5f5e60a1ce004c  1,3,6,28,15,12  Juniper networks JUNOS  80
-3afe30cdf1653a66970ae9ae8443bdca  1,3,4,5,6,12,15,28,42 Juniper networks JUNOS  80
-ac8b90de1120d9e3e2a68354458de76a  3,1,26,252,42,15,6,12 3-D Printer Manuf. MakerBot 80
+32ab58f29eea4ba05d5f5e60a1ce004c        1,3,6,28,15,12  Juniper networks JUNOS  80
+3afe30cdf1653a66970ae9ae8443bdca        1,3,4,5,6,12,15,28,42   Juniper networks JUNOS  80
+ac8b90de1120d9e3e2a68354458de76a        3,1,26,252,42,15,6,12   3-D Printer Manuf. MakerBot 80
 0987f4adb4a2084d53e9750aecec8d8f	58,59,1,28,121,33,3,12,119,15,6,40,41,42	Printer or Scanner/Shandong New Beiyang Information Technology	87
 722dcf1e1ff90c47a09071c81677ddb3	1,2,3,4,6,15,42,54,66,43	VoIP Device/Polycom VoIP/Polycom Conference IP Phone	87
 602c9de54ffecb8ebdd2bad39e716fe3	1,3,28,15,6,44,69,70,42,12,4	Printer or Scanner/Toshiba Printer/Toshiba Multifunction Printer	87
