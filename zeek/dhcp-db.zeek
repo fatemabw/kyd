@@ -1,6 +1,9 @@
 module DHCPFingerprinting;
 export {
     global database: table[string] of string = {
+        ["3afe30cdf1653a66970ae9ae8443bdca"] = "Juniper Networks JUNOS",
+        ["32ab58f29eea4ba05d5f5e60a1ce004c"] = "Juniper Networks JUNOS",
+        ["ac8b90de1120d9e3e2a68354458de76a"] = "3-D Printer Manuf. MakerBot",
 	["0987f4adb4a2084d53e9750aecec8d8f"] = "Printer or Scanner/Shandong New Beiyang Information Technology",
 	["722dcf1e1ff90c47a09071c81677ddb3"] = "VoIP Device/Polycom VoIP/Polycom Conference IP Phone",
 	["602c9de54ffecb8ebdd2bad39e716fe3"] = "Printer or Scanner/Toshiba Printer/Toshiba Multifunction Printer",
