@@ -80,7 +80,7 @@ $ cat unknown-hash
 9b1ee9aff3eb29371efe446ac89e5c3f 1,3,6,15,26,28,51,58,59,43
 ccfe2db9ed5c1e1233e85f2b577d05df 1,2,3,6,15,26,28,88,44,45,46,47,70,69,78,79,120
 
-$ python dhcp_unknown.py -k c21b54e80cbf10147f9a960e38f8b9aea1f3a786 -f unknown_hash -p https://192.168.0.1:4100
+$ python dhcp_unknown.py -k c21b54exxxxxxxxxxxxxxxc1786 -f unknown_hash -p https://192.168.0.1:4100
 
 7fa15642c7d22c817a6a614068a85afa   3,51,1,15,6,66,67,120,44,43,150,12,7,42   Switch and Wireless Controller/Juniper Switches   73
 9b1ee9aff3eb29371efe446ac89e5c3f   1,3,6,15,26,28,51,58,59,43    Operating System/Google OS/Android OS   87
