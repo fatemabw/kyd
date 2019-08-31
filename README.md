@@ -11,7 +11,7 @@ The Fingerbank.org used to maintain a GitHub account of the DHCP fingerprints bu
   
 This method allows you to interrogate a local dhcp-db.txt file (in this repo) with different DHCP fingerprints and obtain the device information that matches that fingerprint. It also provides a confidence level (score) on a scale of 100 for the patterns provided.
 
-The database of fingerprints - dhcp-db.txt, provided with this package, is a continuos effort and developed over time, by quering the Fingerbank's api with the DHCP fingerprints seen on the network to get the device information associated and the score. Also, some of the fingerprints included are collected from the network and back traced to the registered device to get the information regaarding the system that are not found in the Fingerbank's database.
+The database of fingerprints - dhcp-db.txt, provided with this package, is a continuos effort and developed over time, by quering the Fingerbank's api with the DHCP fingerprints seen on the network to get the device information associated and the score. Also, some of the fingerprints included are collected from the network and back traced to the registered device to get the information regarding the system that are not found in the Fingerbank's database.
 
 The python script used to query Fingerbank's database is also provided, to build your own local database of the fingerprints seen on your network which are unknown to the dhcp-db.txt. More details on the usage follows in the Build Your Own KYD Database section.
 
