@@ -20,9 +20,9 @@ The python script used to query Fingerbank's database is also provided, to build
 ### How to use it in Zeek?
 There are two scripts that you would need to load in your local.zeek file:
  
- `dhcp-db.zeek` (containing the DHCP hash and DHCP device info)
+ `dhcp-db.txt` (containing the DHCP hash and DHCP device info)
  
- `dhcp-fp.zeek` (The script that uses dhcp-db.zeek for matching the dhcp fingerprints and generates a new log file in your Zeek logs folder named: `dhcpfp.log`)
+ `dhcp-fp.zeek` (The script that uses dhcp-db.txt for matching the dhcp fingerprints and generates a new log file in your Zeek logs folder named: `dhcpfp.log`)
 
  The scripts are available as a Zeek package, hence you can install by using the Zeek Package Manager and this one simple command:
  
@@ -37,8 +37,10 @@ After loading the scripts, restart your Zeek cluster and a new file `dhcpfp.log`
 ## Build Your Own KYD database (Fingerbank integration)
 
 Once you load the scripts for DHCP FP, Zeek will start generating `dhcpfp.log` which will contain the DHCP fingerprints seen on your network.
-For the ones that are not in the local `dhcp-db.zeek` database file, will be logged as "Unknown".
+For the ones that are not in the local `dhcp-db.txt` database file, will be logged as "Unknown".
 You can get the unknown DHCP fingerprints and hashes seen in a day (or whatever time period you want to choose) on your network and run those through the python script - `dhcp-unknown.py`
+
+If the matches are found in the FingerBank's database, you can then add those unknown hashes to the `dhcp-db.txt`, the input framework will automatically refresh the table contents when it detects a change to the input file - dhcp-db.txt
 
 ### Pre-requisite for using dhcp-unknown.py
 
@@ -59,8 +61,7 @@ I/Ps:
         
 O/Ps: 
 ```
-dhcp-db-extend : file with Zeek formatted entries to append to dhcp-db.zeek
-dhcp-db-FBQ : Tab separated txt file to add to the dhcp-db.txt , to log DHCP fingerprints local to your network
+dhcp-db-FBQ : Tab separated txt file to Update/append to the dhcp-db.txt , to log DHCP fingerprints local to your network
 Also prints out the responses on the standard output
 ```
 
