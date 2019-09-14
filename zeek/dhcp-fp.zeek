@@ -1,5 +1,4 @@
-@load ./dhcp-db.zeek
-@load base/protocols/dhcp
+
 
 module DHCPFP;
 
@@ -26,6 +25,18 @@ type DHCPFPStorage: record {
         param_list: string &default="";
 };
 
+type Idx: record {
+        DHCP_hash: string;
+};
+
+type Val: record {
+        DHCP_FP: string;
+        FingerBank_Device_name: string;	
+        Score: string;
+};
+
+global DHCPDB: table[string] of Val = table();
+
 redef record connection += {
         dhcpfp: DHCPFPStorage &optional;
 };
@@ -35,10 +46,15 @@ event zeek_init()
 @else
 event bro_init()
 @endif
-    {
+{
+    Input::add_table([$source="dhcp-db.txt", $name="DHCPDB",
+                      $idx=Idx, $val=Val, $destination=DHCPDB, $mode=Input::STREAM]);
+    Input::remove("DHCPDB");
+    
     # Create the logging stream.
     Log::create_stream(LOG, [$columns=Info, $path="dhcpfp"]);
-    }
+}
+
 
 event dhcp_message(c: connection, is_orig: bool, msg: DHCP::Msg, options: DHCP::Options) &priority=5
 
@@ -66,9 +82,9 @@ event dhcp_message(c: connection, is_orig: bool, msg: DHCP::Msg, options: DHCP::
                         c$dhcpfp$param_list = s3;
                         c$dhcpfp$DHCPhash = hash;
 
-                        if ( hash in DHCPFingerprinting::database )
+                        if ( hash in DHCPDB )
                         {
-                                c$dhcpfp$DHCPclient = DHCPFingerprinting::database[hash];
+                                c$dhcpfp$DHCPclient = DHCPDB[hash]$FingerBank_Device_name;
                         }
                         else
                         {
