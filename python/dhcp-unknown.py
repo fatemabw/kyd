@@ -74,13 +74,6 @@ def queryFingerbank(file_dic,key,proxy):
         #finally:
     f.close()
 
-    bf = open("dhcp-db-extend", "w")
-    for key in resp_dic:
-        bf.write( "["+"\"" +key+ "\""+"]")
-        bf.write( " = " + "\""+ resp_dic[key][1]+ "\",")
-        bf.write("\n")
-    bf.close()
-
 def main():
     """Intake arguments from the user (file & API key) and output the dhcp-db-extend and dhcp-db-FBQ of the DHCP FP in FingerBank."""
 
