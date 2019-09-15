@@ -18,11 +18,6 @@ The python script used to query Fingerbank's database is also provided, to build
 ## Usage & installation:
 
 ### How to use it in Zeek?
-There are two scripts that you would need to load in your local.zeek file:
- 
- `dhcp-db.txt` (containing the DHCP hash and DHCP device info)
- 
- `dhcp-fp.zeek` (The script that uses dhcp-db.txt for matching the dhcp fingerprints and generates a new log file in your Zeek logs folder named: `dhcpfp.log`)
 
  The scripts are available as a Zeek package, hence you can install by using the Zeek Package Manager and this one simple command:
  
@@ -34,10 +29,38 @@ There are two scripts that you would need to load in your local.zeek file:
 
 After loading the scripts, restart your Zeek cluster and a new file `dhcpfp.log` should start getting genarated logging the device information and DHCP hashes/fingerprints seen in the traffic.
 
+### How to use it on PCAP?
+The python script - kyd.py provided in the python folder of this repository takes pcap file as an input and prints out the DHCP hash and the DHCP fingerprint. It is a python wrapper around kyd logic in order to produce valid DHCP fingerprints from an input PCAP file.
+Following shows an example of reading pcap file and generating DHCP hash using kyd.py (it requires python package - dpkt to be installed first) :
+```
+$ pip install dpkt
+$ python kyd.py --json file.pcap
+
+[
+    {
+        "DHCPFP": "1,28,3,6,15,35,66,150", 
+        "DHCPFP_hash": "ba8acc3498ccc44294fe9fc47f3f7022", 
+        "destination_ip": "192.168.55.12", 
+        "destination_port": 67, 
+        "source_ip": "192.168.55.3", 
+        "source_port": 68, 
+        "timestamp": 1566404777.404548
+    }, 
+    {
+        "DHCPFP": "1,3,6,15,31,33,43,44,46,47,119,121,249,252", 
+        "DHCPFP_hash": "86eed4bae372606b6c52393465543d87", 
+        "destination_ip": "192.168.55.12", 
+        "destination_port": 67, 
+        "source_ip": "192.168.55.6", 
+        "source_port": 67, 
+        "timestamp": 1566404777.523932
+    }
+]
+```
 ## Build Your Own KYD database (Fingerbank integration)
 
-Once you load the scripts for DHCP FP, Zeek will start generating `dhcpfp.log` which will contain the DHCP fingerprints seen on your network.
-For the ones that are not in the local `dhcp-db.txt` database file, will be logged as "Unknown".
+Once you load the scripts for DHCP FP, Zeek will start generating `dhcpfp.log` which will contain the DHCP fingerprints seen on your network. OR if you have a PCAP , run `kyd.py` and it will generate the DHCP fingerprints.
+
 You can get the unknown DHCP fingerprints and hashes seen in a day (or whatever time period you want to choose) on your network and run those through the python script - `dhcp-unknown.py`
 
 If the matches are found in the FingerBank's database, you can then add those unknown hashes to the `dhcp-db.txt`, the input framework will automatically refresh the table contents when it detects a change to the input file - dhcp-db.txt
@@ -68,7 +91,7 @@ Also prints out the responses on the standard output
 Getting the inputs:
 ```
 -k : Api-key: https://api.fingerbank.org/users/register
--f : $zcat /usr/local/zeek/2.6.2/logs/2019-08-28/dhcpfp.*.gz | grep "Unknown" | awk -F'\t' '{print $9,$10}' | sort | uniq > unknown-hash
+-f : via kyd.py in case of pcap, or via zeek dhcpfp.log
 ```
 
 Usage Example:
@@ -79,22 +102,15 @@ $ cat unknown-hash
 
 7fa15642c7d22c817a6a614068a85afa 3,51,1,15,6,66,67,120,44,43,150,12,7,42
 9b1ee9aff3eb29371efe446ac89e5c3f 1,3,6,15,26,28,51,58,59,43
-ccfe2db9ed5c1e1233e85f2b577d05df 1,2,3,6,15,26,28,88,44,45,46,47,70,69,78,79,120
 
 $ python dhcp_unknown.py -k c21b54exxxxxxxxxxxxxxxc1786 -f unknown_hash -p https://192.168.0.1:4100
 
 7fa15642c7d22c817a6a614068a85afa   3,51,1,15,6,66,67,120,44,43,150,12,7,42   Switch and Wireless Controller/Juniper Switches   73
 9b1ee9aff3eb29371efe446ac89e5c3f   1,3,6,15,26,28,51,58,59,43    Operating System/Google OS/Android OS   87
-ccfe2db9ed5c1e1233e85f2b577d05df   1,2,3,6,15,26,28,88,44,45,46,47,70,69,78,79,120      Printer or Scanner/Xerox Printer   73
 ```
 
 ## Contribute!
 Because sharing is caring :) 
 When you run `dhcp_unknown.py`, it will generate `dhcp-db-FBQ` that you can contribute to the database text file provided in this repo - `dhcp-db.txt`.
 It will help others to make use of the already queried DHCP fingerprint and device information that will then be available to them locally.
-
-## Coming Soon...
-
-A general method (most probably a python script) to genarate DHCP hashes from the DHCP fingerprints that can be extracted from any pcap captures available that has captured DHCP conversations,
-So that this can be integrated with other sniffing NSMs/IDSs for doing device classification using dhcp-db.txt database or directly quering Fingerbanks API using `dhcp-unknown.py`.
 
