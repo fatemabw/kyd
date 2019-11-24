@@ -51,7 +51,7 @@ event zeek_init()
 event bro_init()
 @endif
 {
-    Input::add_table([$source=dhcpdb, $name="DHCPDB",
+    Input::add_table([$source=dbfile, $name="DHCPDB",
                       $idx=Idx, $val=Val, $destination=DHCPDB, $mode=Input::STREAM]);
     Input::remove("DHCPDB");
     
