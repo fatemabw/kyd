@@ -28,7 +28,7 @@ The python script used to query Fingerbank's database is also provided, to build
  `@load ./kyd`
 
 There is an redef option in the script : `dbfile` that needs to be updated to the path where you store dhcp-db.txt db file provided with this package.
-It is currently set to `/usr/local/bro/feeds/dhcp-db.txt` , change it to whatever location you want to copy dhcp-db.txt file.
+It is currently set to `dhcp-db.txt`, as when you install the package it will be avalable in the same local dir as the dhcp-fp.zeek script. You can change it to whatever location you want to copy dhcp-db.txt file for ex: `/usr/local/bro/feeds/dhcp-db.txt`
 
 After loading the scripts, restart your Zeek cluster and a new file `dhcpfp.log` should start getting genarated logging the device information and DHCP hashes/fingerprints seen in the traffic.
 
