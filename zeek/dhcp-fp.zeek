@@ -17,6 +17,9 @@ export {
         DHCPhash: string &log;
         param_list: string &log;
         };
+   
+    # Define location of dhcp-db.txt, put dhcp-db.txt in a location that can get dynamically updated like your intel feeds.
+    dbfile = "/usr/local/bro/feeds/dhcp-db.txt" &redef;
 }
 
 type DHCPFPStorage: record {
@@ -37,6 +40,7 @@ type Val: record {
 
 global DHCPDB: table[string] of Val = table();
 
+
 redef record connection += {
         dhcpfp: DHCPFPStorage &optional;
 };
@@ -47,7 +51,7 @@ event zeek_init()
 event bro_init()
 @endif
 {
-    Input::add_table([$source="dhcp-db.txt", $name="DHCPDB",
+    Input::add_table([$source=dhcpdb, $name="DHCPDB",
                       $idx=Idx, $val=Val, $destination=DHCPDB, $mode=Input::STREAM]);
     Input::remove("DHCPDB");
     
