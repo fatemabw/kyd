@@ -95,7 +95,7 @@ def main():
 
     # Use an iterator to process each line of the file
     output = None
-    with open(filename, 'rb') as fp:
+    with open(args.pcap, 'rb') as fp:
         try:
             capture = dpkt.pcap.Reader(fp)
         except ValueError as e:
