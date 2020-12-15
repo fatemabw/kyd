@@ -83,8 +83,13 @@ def main():
     help_text = "The api key for the FingerBank access"
     parser.add_argument("-k", "--api_key", required=True, type=str, help=help_text)
 
+    input_file_group = parser.add_mutually_exclusive_group(required=True)
+
     help_text = "File containing unknown DHCP Hashes and DHCP FP"
-    parser.add_argument("-f", "--file_unknown_hashes", required=True, type=str, help=help_text)
+    input_file_group.add_argument("-f", "--file_unknown_hashes", type=str, help=help_text)
+
+    help_text = "JSON file (output of kyd.py) containing unknown DHCP hashes and DHCP FP"
+    input_file_group.add_argument("-j", "--json_unknown_hashes", type=str, help=help_text)
 
     help_text = "Proxy support for the isolated servers, give the proxy url as arg ex: http://ip:port"
     parser.add_argument("-p", "--proxy", required=False, type=str, help=help_text)
@@ -94,12 +99,19 @@ def main():
 
     file_dic = {}
 
-    with open(args.file_unknown_hashes) as f:
-    #next(f)
-        for line in f:
-           (key, val) = line.split()
-           file_dic[key] = val
-    f.close()
+    if args.file_unknown_hashes:
+        with open(args.file_unknown_hashes) as f:
+        #next(f)
+            for line in f:
+                (key, val) = line.split()
+                file_dic[key] = val
+        f.close()
+    elif args.json_unknown_hashes:
+        with open(args.json_unknown_hashes) as f:
+            json_data = f.read()
+            raw_dic = json.loads(json_data)
+        for e in raw_dic:
+            file_dic[e['DHCPFP_hash']] = e['DHCPFP']
 
     if args.proxy:
         proxy = args.proxy
